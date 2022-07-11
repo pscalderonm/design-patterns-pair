@@ -1,6 +1,5 @@
 package dao.impl;
 
-import config.DatabaseConnection;
 import dao.UserDao;
 import model.User;
 

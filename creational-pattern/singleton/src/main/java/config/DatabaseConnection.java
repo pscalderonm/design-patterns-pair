@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private static DatabaseConnection instance;
 
     private Connection connection;
-    private final String url = "jdbc:postgresql://localhost:5432/";
+    private static final String url = "jdbc:postgresql://localhost:5432/";
 
     public String database;
     public String username;
@@ -22,16 +22,12 @@ public class DatabaseConnection {
             this.password = password;
 
             Class.forName("org.postgresql.Driver");
-            this.connection = DriverManager.getConnection(this.url+this.database,this.username,this.password);
+            this.connection = DriverManager.getConnection(url+this.database,this.username,this.password);
         } catch (ClassNotFoundException e) {
             System.out.println("Driver de conexion no encontrado "+ e.getMessage());
         } catch (SQLException e) {
             System.out.println("Error en la conexion debase de datos: "+ e.getMessage());
         }
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 
     public static DatabaseConnection getInstance(String database, String username, String password) throws SQLException {
@@ -42,4 +38,18 @@ public class DatabaseConnection {
         }
         return instance;
     }
+
+    @Override
+    public String toString() {
+        return "DatabaseConnection{" +
+                "database='" + database + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
 }
