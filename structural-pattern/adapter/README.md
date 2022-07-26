@@ -23,9 +23,9 @@ tenga una respuesta síncrona, el API deberá regresar verdadero
 cuando se le autorice el crédito, pero deberá lanzar una excepción
 cuando el crédito no sea autorizado."
 
-### Solucion del problema
+### Solución al problema
 
-1. Se procede creando las clases que representan al servicio del ZBank. `UnauthorizedCreditException` representa la respuesta del servicio cuando el credito no fue aprobado.
+Se procede creando las clases que representan al servicio del ZBank. `UnauthorizedCreditException` representa la respuesta del servicio cuando el credito no fue aprobado.
 
 **ZBankCreditRequest**
 ``` java
@@ -92,7 +92,7 @@ public class ZBankApiClient {
     }
 }
 ```
-2. Definimos el nuevo adapter que va a interactuar con el servicio del ZBank. Internamente se controla la excepción basada en regla de negocio que puede ser lanzada si la regla (aprobación de crédito) no se cumple.
+Definimos el nuevo adapter que va a interactuar con el servicio del ZBank. Internamente se controla la excepción basada en regla de negocio que puede ser lanzada si la regla (aprobación de crédito) no se cumple.
 
 **ZBankCreditAdapter**
 ``` java
@@ -128,7 +128,7 @@ public class ZBankCreditAdapter implements IBankAdapter {
 }
 ```
 
-3. Por último, se llama al nuevo adapter en la clase `Main` para ejecutarlo `line 25 to 27`
+Por último, se llama al nuevo adapter en la clase `Main` para ejecutarlo `line 25 to 27`
 
 ``` java
 BankAdapter zBank = new ZBankCreditAdapter();
@@ -140,11 +140,4 @@ System.out.println("zBank approved >" + zresponse.isApproved() + "\n");
 
 Se simula la llamada al ZBank, obteniendo como respuesta una excepción, la misma que es controlada dentro del Adapter y presentada a modo de log en consola. Al final el resultado devuelveto es el objeto `BankCreditResponse` con su propiedad `approved` en false
 
-![](resources/adapter-result.png)
-
-## Patron Decorator
-TODO: Complete...
-
-### Solucion del problema
-
-TODO: Complete...
+![](../resources/adapter-result.png)
